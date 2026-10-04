@@ -39,8 +39,7 @@ h1 {
 /* Container that limits the width of the envelope area */
 .container {
     width: 400px;                        /* Fixed width for desktop view */
-    position: relative;                  /* Position relative for heart animation */
-    overflow: visible;                   /* Allow floating hearts to appear outside */
+    position: relative;                  /* Position relative for the envelope */
 }
 
 /* Main envelope wrapper that holds the envelope and applies background and shadow */
@@ -171,98 +170,6 @@ h1 {
     right: 15px;                           /* Move the circle to the right to form the second part of the heart */
 }
 
-/* ===== Flying hearts outside the envelope ===== */
-.flying-hearts {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: visible;
-    z-index: 30;
-}
-
-.heart {
-    position: absolute;
-    top: 48%;
-    left: 50%;
-    font-size: 22px;
-    opacity: 0;
-    animation: fly-heart 3.2s ease-in-out infinite;
-    filter: drop-shadow(0 0 6px rgba(255, 71, 126, 0.5));
-}
-
-.heart:nth-child(1) {
-    --x: -140px;
-    --y: -80px;
-    animation-delay: 0s;
-}
-
-.heart:nth-child(2) {
-    --x: 130px;
-    --y: -120px;
-    animation-delay: 0.4s;
-}
-
-.heart:nth-child(3) {
-    --x: -80px;
-    --y: -170px;
-    animation-delay: 0.8s;
-}
-
-.heart:nth-child(4) {
-    --x: 90px;
-    --y: -150px;
-    animation-delay: 1.2s;
-}
-
-.heart:nth-child(5) {
-    --x: 0px;
-    --y: -200px;
-    animation-delay: 1.6s;
-}
-
-@keyframes fly-heart {
-    0% {
-        transform: translate(-50%, 0) scale(0.7) rotate(0deg);
-        opacity: 0;
-    }
-    15% {
-        opacity: 1;
-    }
-    50% {
-        transform: translate(var(--x), var(--y)) scale(1.2) rotate(-18deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(calc(var(--x) * 1.4), calc(var(--y) - 120px)) scale(0.8) rotate(18deg);
-        opacity: 0;
-    }
-}
-
-/* ===== Bottom decorative hearts ===== */
-.container::after {
-    content: "♥ ♥ ♥ ♥ ♥";
-    position: absolute;
-    bottom: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 24px;
-    color: var(--sticker);
-    letter-spacing: 8px;
-    animation: float-hearts 3s ease-in-out infinite;
-    z-index: 5;
-}
-
-@keyframes float-hearts {
-    0%, 100% {
-        transform: translateX(-50%) translateY(0px);
-        opacity: 1;
-    }
-    50% {
-        transform: translateX(-50%) translateY(-15px);
-        opacity: 0.8;
-    }
-}
-
 /* ===== Custom scroll-bar styles for WebKit-based browsers ===== */
 
 /* Scrollbar width for elements that overflow vertically */
@@ -342,10 +249,5 @@ h1 {
     .content {
         font-size: 18px;                   /* Maintain 2x scaling on mobile */
         line-height: 22px;                 /* Adjusted line height for mobile */
-    }
-
-    .container::after {
-        font-size: 18px;                   /* Smaller hearts on mobile */
-        bottom: -40px;                     /* Adjust position on mobile */
     }
 }
