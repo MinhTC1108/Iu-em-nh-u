@@ -39,6 +39,7 @@ h1 {
 /* Container that limits the width of the envelope area */
 .container {
     width: 400px;                        /* Fixed width for desktop view */
+    position: relative;                  /* Position relative for heart decoration */
 }
 
 /* Main envelope wrapper that holds the envelope and applies background and shadow */
@@ -119,11 +120,11 @@ h1 {
     font-family: "Gill Sans", Calibri, sans-serif; /* Clean, readable font */
     color: var(--text);                    /* Use main text color variable */
     text-align: left;                      /* Align text to the left for easier reading */
-    font-size: 12px;                       /* Small base font size */
+    font-size: 24px;                       /* Increased font size (2x from 12px) */
     border: 3px dotted var(--text);        /* Dotted border to mimic a decorative frame */
     padding: 10px;                         /* Inner spacing around the text */
     height: 100%;                          /* Occupy the full height of the letter */
-    line-height: 14px;                     /* Line spacing for readability */
+    line-height: 28px;                     /* Increased line spacing (2x from 14px) */
     cursor: pointer;                       /* Pointer cursor indicates that content is clickable */
     overflow-Y: scroll;                    /* Enable vertical scrolling when content overflows */
 }
@@ -161,6 +162,32 @@ h1 {
 /* Right circle of the heart shape */
 .sticker:after {
     right: 15px;                           /* Move the circle to the right to form the second part of the heart */
+}
+
+/* ===== Floating hearts decoration at the bottom of the card ===== */
+.container::after {
+    content: "♥ ♥ ♥ ♥ ♥";                 /* Add heart symbols */
+    position: absolute;                    /* Position relative to container */
+    bottom: -50px;                         /* Place below the envelope */
+    left: 50%;                             /* Center horizontally */
+    transform: translateX(-50%);           /* Adjust for centering */
+    font-size: 24px;                       /* Size of the hearts */
+    color: var(--sticker);                 /* Use sticker color (pink) */
+    letter-spacing: 8px;                   /* Space between hearts */
+    animation: float-hearts 3s ease-in-out infinite; /* Floating animation */
+    z-index: 5;                            /* Above other elements */
+}
+
+/* Floating animation for hearts */
+@keyframes float-hearts {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0px);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(-50%) translateY(-15px);
+        opacity: 0.8;
+    }
 }
 
 /* ===== Custom scroll-bar styles for WebKit-based browsers ===== */
@@ -237,5 +264,15 @@ h1 {
         border-top:150px solid var(--envelop-flap); /* Adjust flap height */
         border-right: 150px solid transparent;      /* Adjust right side for proper triangle */
         border-left: 150px solid transparent;       /* Adjust left side for proper triangle */
+    }
+
+    .content {
+        font-size: 18px;                   /* Maintain 2x scaling on mobile */
+        line-height: 22px;                 /* Adjusted line height for mobile */
+    }
+
+    .container::after {
+        font-size: 18px;                   /* Smaller hearts on mobile */
+        bottom: -40px;                     /* Adjust position on mobile */
     }
 }
